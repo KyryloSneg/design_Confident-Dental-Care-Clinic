@@ -77,6 +77,7 @@ const InputGroup = <Schema extends ZodObject<any, any> = DefaultSchema>({
   } = useForm<FormData>({
     // @ts-ignore - couldn't managed to fix this. i lost
     resolver: zodResolver(formSchemaToUse),
+    shouldUseNativeValidation: false,
   });
 
   const placeholderPropsToUse: PlaceholderProps = {
@@ -166,12 +167,13 @@ const InputGroup = <Schema extends ZodObject<any, any> = DefaultSchema>({
           type="search"
           placeholder=""
           autoComplete="off"
+          aria-invalid={isError}
           data-active={isActive}
           data-invalid={isError}
           {...inputProps}
           {...rhfInputProps}
           className={cn(
-            "peer h-8.5 w-full rounded-full border border-transparent bg-secondary-100 pl-3.75 font-sans text-b2-light text-text-primary transition-colors outline-none focus-visible:border focus-visible:border-primary-500 data-[invalid=true]:border-accent-orange-200 data-[invalid=true]:text-accent-orange-500 data-[invalid=true]:focus-visible:border-accent-orange-500",
+            "peer h-8.5 w-full rounded-full border border-transparent bg-secondary-100 pl-3.75 font-sans text-b2-light text-text-primary inset-shadow-[0_0_0_1000px_var(--color-bg-secondary)] transition-colors outline-none focus-visible:border focus-visible:border-primary-500 data-[invalid=true]:border-accent-orange-200 data-[invalid=true]:text-accent-orange-500 data-[invalid=true]:focus-visible:border-accent-orange-500",
             isResponsive
               ? "p-(--mobile-visible-m) pr-(--input-mobile-pr)! tablet:h-10.75 tablet:p-(--tablet-visible-m) tablet:pr-(--input-tablet-pr)!"
               : "h-10.75 p-(--tablet-visible-m) pr-(--input-tablet-pr)!",
@@ -183,7 +185,7 @@ const InputGroup = <Schema extends ZodObject<any, any> = DefaultSchema>({
           data-invalid={isError}
           {...placeholderPropsWithoutCSSContent}
           className={cn(
-            "pointer-events-none absolute inset-y-0 ml-(--placeholder-additional-ml) flex font-sans text-b2-light text-primary-200 transition-colors peer-focus:text-primary-500 peer-data-active:opacity-0 before:absolute before:top-1/2 before:w-max before:[content:var(--input-group-placeholder-content)]! data-[invalid=true]:text-accent-orange-500",
+            "pointer-events-none absolute inset-y-0 ml-(--placeholder-additional-ml) flex font-sans text-b2-light text-primary-200 transition-colors peer-autofill:opacity-0 peer-focus:text-primary-500 peer-data-active:opacity-0 peer-[-webkit-autofill]:opacity-0 before:absolute before:top-1/2 before:w-max before:[content:var(--input-group-placeholder-content)]! data-[invalid=true]:text-accent-orange-500",
             isResponsive
               ? "left-(--mobile-visible-ml) before:translate-y-(--mobile-button-translate-y) tablet:left-(--tablet-visible-ml) tablet:before:translate-y-(--tablet-button-translate-y)"
               : "left-(--tablet-visible-ml) before:translate-y-(--tablet-button-translate-y)",

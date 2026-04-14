@@ -18,6 +18,7 @@ const FooterSearchInputGroup = () => {
         className: "tablet:left-(--tablet-override-visible-ml)",
       }}
       inputProps={{
+        type: "email",
         className: "h-11 tablet:p-(--tablet-override-visible-m)",
       }}
       buttonProps={{
